@@ -31,7 +31,7 @@ func configureFlags(){
 	pflag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
 		fmt.Printf("\nDescription:\n")
-		fmt.Printf("  Collects the pprof profile from `net/http/pprof` endpoints and send it to a AWS Bucket\n")
+		fmt.Printf("  Continuously collects the pprof profile from `net/http/pprof` endpoints and sends it to a AWS Bucket\n")
 		fmt.Printf("\nOptions:\n")
 		pflag.PrintDefaults()
 	}

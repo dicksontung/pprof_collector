@@ -3,7 +3,7 @@
 Usage of pprof_collector:
 
 Description:
-  Collects the pprof profile from `net/http/pprof` endpoints and sends it to a AWS Bucket
+  Continuously collects the pprof profile from `net/http/pprof` endpoints and sends it to a AWS Bucket
 
 Options:
       --application_name string   Application name to identify the current profile (default "undefined")
