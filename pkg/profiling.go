@@ -36,7 +36,11 @@ func Download() {
 		log.Printf("Unable to create file %q: %+v\n", fileName, err)
 		return
 	}
-	defer out.Close()
+	defer func() {
+		if err := out.Close(); err != nil {
+			log.Printf("Error when closing: %+v", err)
+		}
+	}()
 	url := fmt.Sprintf("%s?seconds=%d", viper.GetString("url"), viper.GetInt("seconds"))
 	http.DefaultClient.Timeout = viper.GetDuration("seconds") * 2 * time.Second
 	log.Printf("Downloading profile from %s", url)
@@ -45,7 +49,11 @@ func Download() {
 		log.Printf("Unable to get pprof profile: %+v", err)
 		return
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			log.Printf("Error when closing: %+v", err)
+		}
+	}()
 	if resp.StatusCode != 200 {
 		log.Printf("Unable to download pprof profile: %+v", resp)
 		return
