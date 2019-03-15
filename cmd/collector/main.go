@@ -43,7 +43,7 @@ func configureFlags(){
 	pflag.StringP("bucket", "b", "", "[required] S3 Bucket name")
 	pflag.StringP("application_name", "", "undefined", "Application name to identify the current profile")
 	pflag.StringP("url", "", "http://localhost/debug/pprof/profile", "Url for pprof profile")
-	pflag.StringP("output", "o", ".", "Output directory")
+	pflag.StringP("output", "o", "./tmp/pprof_collector", "Output directory")
 	pflag.Parse()
 	err := viper.BindPFlags(pflag.CommandLine)
 	if err != nil {
