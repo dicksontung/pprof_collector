@@ -36,6 +36,10 @@ func configureFlags(){
 		fmt.Printf("  Continuously collects the pprof profile from `net/http/pprof` endpoints and optionally sends it to a AWS Bucket\n")
 		fmt.Printf("\nOptions:\n")
 		pflag.PrintDefaults()
+		fmt.Printf("\nEnvironment Variables:\n")
+		fmt.Printf("  Parameter can be passed in through UPPERCASE enviroment variables:\n")
+		fmt.Printf("    SECONDS=30\n")
+		fmt.Printf("    APPLICATION_NAME=example\n")
 	}
 	pflag.IntP("seconds", "s", 30, "Polling interval in seconds")
 	pflag.IntP("cooldown", "", 5, "Cool down period in seconds")

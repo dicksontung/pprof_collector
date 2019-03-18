@@ -16,4 +16,10 @@ Options:
   -s, --seconds int               Polling interval in seconds (default 30)
       --url string                Url for pprof profile (default "http://localhost/debug/pprof/profile")
 
+Environment Variables:
+  Parameter can be passed in through UPPERCASE enviroment variables:
+    SECONDS=30
+    APPLICATION_NAME=example
+
+
 ```

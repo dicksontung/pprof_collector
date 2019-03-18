@@ -40,7 +40,7 @@ ci: lint test ## Run all the tests and code checks
 
 .PHONY: build
 build: ## Build a version
-	go build -o pprof_collector ./cmd/collector/
+	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o pprof_collector ./cmd/collector/
 
 .PHONY: clean
 clean: ## Remove temporary files
