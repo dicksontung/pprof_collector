@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/pprof_collector/pkg"
 	"github.com/pprof_collector/pkg/awsS3"
-	"github.com/pprof_collector/pkg/server"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"io/ioutil"
@@ -17,7 +16,6 @@ func main() {
 	configureFlags()
 	log.Printf("Start polling pprof profile every %d seconds\n", viper.GetInt("seconds"))
 	log.Printf("Transferring to %q \n", viper.GetString("bucket"))
-	go server.Profiling()
 	for {
 		profiling.Download()
 		if viper.GetString("aws_access_key") != "" {
