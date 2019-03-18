@@ -20,7 +20,9 @@ func main() {
 	go server.Profiling()
 	for {
 		profiling.Download()
-		uploadAll()
+		if viper.GetString("aws_access_key") != "" {
+			uploadAll()
+		}
 		cooldown()
 	}
 
@@ -31,16 +33,16 @@ func configureFlags(){
 	pflag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
 		fmt.Printf("\nDescription:\n")
-		fmt.Printf("  Continuously collects the pprof profile from `net/http/pprof` endpoints and sends it to a AWS Bucket\n")
+		fmt.Printf("  Continuously collects the pprof profile from `net/http/pprof` endpoints and optionally sends it to a AWS Bucket\n")
 		fmt.Printf("\nOptions:\n")
 		pflag.PrintDefaults()
 	}
 	pflag.IntP("seconds", "s", 30, "Polling interval in seconds")
 	pflag.IntP("cooldown", "", 5, "Cool down period in seconds")
-	pflag.StringP("aws_access_key", "u", "", "[required] AWS Access Key")
-	pflag.StringP("aws_secret_key", "p", "", "[required] AWS Secret Key")
-	pflag.StringP("region", "r", "", "[required] Region for the S3 Bucket")
-	pflag.StringP("bucket", "b", "", "[required] S3 Bucket name")
+	pflag.StringP("aws_access_key", "u", "", "AWS Access Key")
+	pflag.StringP("aws_secret_key", "p", "", "AWS Secret Key")
+	pflag.StringP("region", "r", "", "Region for the S3 Bucket")
+	pflag.StringP("bucket", "b", "", "S3 Bucket name")
 	pflag.StringP("application_name", "", "undefined", "Application name to identify the current profile")
 	pflag.StringP("url", "", "http://localhost/debug/pprof/profile", "Url for pprof profile")
 	pflag.StringP("output", "o", "./tmp/pprof_collector", "Output directory")

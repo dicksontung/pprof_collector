@@ -23,7 +23,7 @@ func Download() {
 	defer log.Println("-- Polling cycle ended --")
 	t := time.Now().Format("20060102T150405Z")
 	if _, err := os.Stat(viper.GetString("output")); os.IsNotExist(err) {
-		err = os.Mkdir(viper.GetString("output"), os.ModePerm)
+		err = os.MkdirAll(viper.GetString("output"), os.ModePerm)
 		if err != nil {
 			log.Printf("Unable to create folder: %+v\n", err)
 			return
